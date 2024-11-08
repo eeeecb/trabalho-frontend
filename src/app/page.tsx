@@ -1,69 +1,158 @@
+// src/app/page.tsx
+import { Metadata } from "next";
+import { auth } from "../server/auth";
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Activity, Users, BookOpen, Calendar } from "lucide-react";
 import Link from "next/link";
 
-import { LatestPost } from "~/app/_components/post";
-import { auth } from "~/server/auth";
-import { api, HydrateClient } from "~/trpc/server";
+export const metadata: Metadata = {
+  title: "Dashboard | T3 Stack App",
+  description: "Dashboard principal do aplicativo T3 Stack",
+};
 
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
+async function getPageData() {
   const session = await auth();
+  
+  // Aqui você pode adicionar chamadas ao seu backend/banco de dados
+  // Exemplo de dados estáticos para demonstração
+  const stats = {
+    totalUsers: 1234,
+    activeCourses: 15,
+    upcomingEvents: 8,
+    activeUsers: 342,
+  };
 
-  if (session?.user) {
-    void api.post.getLatest.prefetch();
-  }
+  return {
+    session,
+    stats,
+  };
+}
+
+export default async function HomePage() {
+  const { session, stats } = await getPageData();
 
   return (
-    <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
+    <div className="space-y-6">
+      {/* Seção de Boas-vindas */}
+      <section className="space-y-2">
+        <h1 className="text-4xl font-bold tracking-tight">
+          {session ? `Bem-vindo, ${session.user.name}!` : "Bem-vindo!"}
+        </h1>
+        <p className="text-muted-foreground">
+          {session 
+            ? "Veja um resumo das suas atividades e informações importantes."
+            : "Faça login para acessar todas as funcionalidades."}
+        </p>
+      </section>
+
+      {/* Cards de Estatísticas */}
+      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Usuários Totais</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.totalUsers}</div>
+            <p className="text-xs text-muted-foreground">
+              +20.1% em relação ao mês anterior
             </p>
+          </CardContent>
+        </Card>
 
-            <div className="flex flex-col items-center justify-center gap-4">
-              <p className="text-center text-2xl text-white">
-                {session && <span>Logged in as {session.user?.name}</span>}
-              </p>
-              <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >
-                {session ? "Sign out" : "Sign in"}
-              </Link>
-            </div>
-          </div>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Usuários Ativos</CardTitle>
+            <Activity className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.activeUsers}</div>
+            <p className="text-xs text-muted-foreground">
+              +12.2% em relação ao mês anterior
+            </p>
+          </CardContent>
+        </Card>
 
-          {session?.user && <LatestPost />}
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Cursos Ativos</CardTitle>
+            <BookOpen className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.activeCourses}</div>
+            <p className="text-xs text-muted-foreground">
+              +2 novos cursos este mês
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Eventos Próximos</CardTitle>
+            <Calendar className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{stats.upcomingEvents}</div>
+            <p className="text-xs text-muted-foreground">
+              Próximos 30 dias
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Seção de Ações Rápidas */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight">Ações Rápidas</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Link href="/cursos">
+            <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5" />
+                  Ver Cursos
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Explore nossos cursos disponíveis e comece a aprender.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link href="/agenda">
+            <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5" />
+                  Agenda
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Veja seus próximos eventos e compromissos.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
+
+          <Link href="/configuracoes">
+            <Card className="hover:bg-accent/50 transition-colors cursor-pointer">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Perfil
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Atualize suas informações e preferências.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
-      </main>
-    </HydrateClient>
+      </section>
+    </div>
   );
 }
