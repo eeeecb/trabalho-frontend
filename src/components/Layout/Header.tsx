@@ -1,19 +1,35 @@
 'use client';
 
-import { signOut } from "../../server/auth";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { UserCircle } from "lucide-react";
-import { Button } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
+import { Button } from "../ui/button";
+import { cn } from "../../lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   // Para trocar as cores, apenas altere a cor aqui
   const titleColorClass = "!text-custom-wine";
   const iconColorClass = "!text-custom-wine";
   const hoverColorClass = "hover:!text-custom-wine";
+
+  const handleSignOut = async () => {
+    try {
+      await signOut({ 
+        redirect: false // Desabilita o redirecionamento automático do NextAuth
+      });
+      
+      // Redireciona para a página inicial
+      router.push('/');
+      // Força atualização da página
+      window.location.reload();
+    } catch (error) {
+      console.error('Erro ao fazer logout:', error);
+    }
+  };
 
   return (
     <header className="bg-gray-800 border-b border-gray-700 p-4">
@@ -26,7 +42,7 @@ export default function Header() {
               <span className={cn("text-base text-gray-300")}>{session.user.name || session.user.email}</span>
               <Button
                 variant="ghost"
-                onClick={() => signOut()}
+                onClick={handleSignOut}
                 className={cn("text-base text-gray-300", hoverColorClass)}
               >
                 Sair

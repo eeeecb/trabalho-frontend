@@ -1,0 +1,49 @@
+src
+├─ app
+│  ├─ _components
+│  │  ├─ login.tsx
+│  │  └─ post.tsx
+│  ├─ api
+│  │  ├─ auth
+│  │  │  └─ [...nextauth]
+│  │  │     └─ route.ts
+│  │  └─ trpc
+│  │     └─ [trpc]
+│  │        └─ route.ts
+│  ├─ layout.tsx
+│  ├─ login
+│  │  └─ page.tsx
+│  └─ page.tsx
+├─ components
+│  ├─ Layout
+│  │  ├─ Footer.tsx
+│  │  ├─ Header.tsx
+│  │  ├─ Login.tsx
+│  │  ├─ Sidebar.tsx
+│  │  └─ index.tsx
+│  ├─ theme-provider.tsx
+│  └─ ui
+│     ├─ button.tsx
+│     ├─ card.tsx
+│     └─ input.tsx
+├─ env.js
+├─ lib
+│  └─ utils.ts
+├─ middleware.tsx
+├─ server
+│  ├─ api
+│  │  ├─ root.ts
+│  │  ├─ routers
+│  │  │  └─ post.ts
+│  │  └─ trpc.ts
+│  ├─ auth
+│  │  ├─ config.ts
+│  │  └─ index.ts
+│  ├─ auth.ts
+│  └─ db.ts
+├─ styles
+│  └─ globals.css
+└─ trpc
+   ├─ query-client.ts
+   ├─ react.tsx
+   └─ server.ts
