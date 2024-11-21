@@ -33,7 +33,7 @@ interface CircularProgressProps {
 // Novo componente CircularProgress com tipagem adequada
 const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, label, color, bgColor }) => {
   const radius = 38;
-  const circumference = Math.PI * radius * 2;
+  const circumference = Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
