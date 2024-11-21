@@ -22,11 +22,18 @@ import { Textarea } from "../ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { useState } from "react";
 
-// Novo componente CircularProgress
-const CircularProgress = ({ percentage, label, color, bgColor }) => {
+// Interface para as props do CircularProgress
+interface CircularProgressProps {
+  percentage: number;
+  label: string;
+  color: string;
+  bgColor: string;
+}
+
+// Novo componente CircularProgress com tipagem adequada
+const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, label, color, bgColor }) => {
   const radius = 38;
-  const circumference = Math.PI * radius;
-  const strokeDasharray = circumference;
+  const circumference = Math.PI * radius * 2;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
@@ -46,8 +53,8 @@ const CircularProgress = ({ percentage, label, color, bgColor }) => {
             strokeWidth="4"
             fill="transparent"
             style={{
-              strokeDasharray: circumference,
-              strokeDashoffset: strokeDashoffset,
+              strokeDasharray: `${circumference}`,
+              strokeDashoffset,
             }}
             className="transition-all duration-1000 ease-in-out"
           />
@@ -63,8 +70,7 @@ const CircularProgress = ({ percentage, label, color, bgColor }) => {
   );
 };
 
-// Novo componente ProgressStats
-const ProgressStats = () => {
+const ProgressStats: React.FC = () => {
   return (
     <div className="flex justify-center space-x-8">
       <CircularProgress
@@ -83,12 +89,19 @@ const ProgressStats = () => {
   );
 };
 
+// Interface para serviços
+interface Service {
+  name: string;
+  description: string;
+  icon: React.FC<{ className?: string }>;
+}
+
 export function BlockPage() {
   const router = useRouter();
   const { isAuthenticated, logout } = useAuth();
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const services = [
+  const services: Service[] = [
     {
       name: "TRANSPORTE DEDICADO",
       description: "Frota exclusiva dimensionada para sua operação, com veículos personalizados, rastreamento 24h e equipe especializada. Ideal para operações regulares que exigem alto nível de personalização e controle",      
@@ -111,7 +124,7 @@ export function BlockPage() {
     }
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormSubmitted(true);
     setTimeout(() => setFormSubmitted(false), 3000);
