@@ -1,49 +1,54 @@
+public
+├─ favicon.ico
+└─ truck.jpg
 src
 ├─ app
 │  ├─ _components
 │  │  ├─ login.tsx
-│  │  └─ post.tsx
-│  ├─ api
-│  │  ├─ auth
-│  │  │  └─ [...nextauth]
-│  │  │     └─ route.ts
-│  │  └─ trpc
-│  │     └─ [trpc]
-│  │        └─ route.ts
+│  │  ├─ post.tsx
+│  │  └─ register.tsx
+│  ├─ dashboard
+│  │  └─ page.tsx
 │  ├─ layout.tsx
 │  ├─ login
 │  │  └─ page.tsx
-│  └─ page.tsx
+│  ├─ not-found.tsx
+│  ├─ page.tsx
+│  └─ register
+│     └─ page.tsx
 ├─ components
 │  ├─ Layout
-│  │  ├─ Footer.tsx
-│  │  ├─ Header.tsx
-│  │  ├─ Login.tsx
-│  │  ├─ Sidebar.tsx
-│  │  └─ index.tsx
+│  │  ├─ dashboard
+│  │  │  ├─ Footer.tsx
+│  │  │  ├─ Header.tsx
+│  │  │  ├─ Login.tsx
+│  │  │  ├─ Register.tsx
+│  │  │  ├─ Sidebar.tsx
+│  │  │  ├─ config
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ entregas
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ index.tsx
+│  │  │  ├─ page.tsx
+│  │  │  └─ pedidos
+│  │  │     └─ page.tsx
+│  │  └─ page.tsx
 │  ├─ theme-provider.tsx
 │  └─ ui
 │     ├─ button.tsx
 │     ├─ card.tsx
-│     └─ input.tsx
+│     ├─ input.tsx
+│     ├─ select.tsx
+│     └─ textarea.tsx
 ├─ env.js
+├─ hooks
+│  ├─ useAuth.ts
+│  └─ useAuthNavigation.ts
 ├─ lib
+│  ├─ auth-service.ts
 │  └─ utils.ts
 ├─ middleware.tsx
-├─ server
-│  ├─ api
-│  │  ├─ root.ts
-│  │  ├─ routers
-│  │  │  └─ post.ts
-│  │  └─ trpc.ts
-│  ├─ auth
-│  │  ├─ config.ts
-│  │  └─ index.ts
-│  ├─ auth.ts
-│  └─ db.ts
-├─ styles
-│  └─ globals.css
-└─ trpc
-   ├─ query-client.ts
-   ├─ react.tsx
-   └─ server.ts
+├─ providers
+│  └─ AuthProvider.tsx
+└─ styles
+   └─ globals.css

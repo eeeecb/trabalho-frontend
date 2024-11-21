@@ -1,20 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
+import { useAuth } from '~/providers/AuthProvider';
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
   
-  // Mostrar mensagem de sucesso se o usuário acabou de se registrar
   const justRegistered = searchParams.get('registered') === 'true';
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,21 +25,10 @@ export default function LoginPage() {
     const password = formData.get('password') as string;
 
     try {
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        setError('Credenciais inválidas');
-        return;
-      }
-
-      router.push('/');
-      router.refresh();
+      await login(email, password);
+      router.push('/'); // Vai para a página inicial após o login
     } catch (error) {
-      setError('Ocorreu um erro ao fazer login');
+      setError(error instanceof Error ? error.message : 'Credenciais inválidas');
     } finally {
       setLoading(false);
     }

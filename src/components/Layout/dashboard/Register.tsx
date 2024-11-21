@@ -3,14 +3,16 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
+import { useAuth } from '~/providers/AuthProvider';
 
 export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,17 +25,7 @@ export default function Register() {
     const name = formData.get("name") as string;
 
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, name }),
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Erro durante o registro");
-      }
-
+      await register({ email, password, name });
       router.push("/login?registered=true");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Algo deu errado");

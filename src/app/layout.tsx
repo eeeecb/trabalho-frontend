@@ -1,11 +1,8 @@
-// src/app/layout.tsx
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
 import "~/styles/globals.css";
-import { cookies } from "next/headers";
-import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "~/components/theme-provider";
-import Layout from "~/components/Layout";
+import { AuthProvider } from "~/providers/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,16 +23,16 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`font-sans ${inter.variable}`}>
-        <SessionProvider>
+        <AuthProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
-            <Layout>{children}</Layout>
+            {children}
           </ThemeProvider>
-        </SessionProvider>
+        </AuthProvider>
       </body>
     </html>
   );

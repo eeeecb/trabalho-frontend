@@ -3,21 +3,18 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Book, Calendar, Settings, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Home, Package, Truck, Settings, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { cn } from "~/lib/utils";
 
 export default function Sidebar() {
-  // Inicializa o estado com o valor do localStorage, se disponível
   const [isExpanded, setIsExpanded] = useState(false);
   const pathname = usePathname();
 
-  // Carrega o estado inicial do localStorage
   useEffect(() => {
     const savedState = localStorage.getItem("sidebarExpanded");
     setIsExpanded(savedState ? JSON.parse(savedState) : true);
   }, []);
 
-  // Atualiza o localStorage quando o estado muda
   const toggleSidebar = () => {
     const newState = !isExpanded;
     setIsExpanded(newState);
@@ -32,10 +29,10 @@ export default function Sidebar() {
       onClick: toggleSidebar,
       className: "hover:text-custom-wine-400"
     },
-    { href: "/", icon: Home, label: "Início" },
-    { href: "/cursos", icon: Book, label: "Cursos" },
-    { href: "/agenda", icon: Calendar, label: "Agenda" },
-    { href: "/configuracoes", icon: Settings, label: "Configurações" },
+    { href: "/dashboard", icon: Home, label: "Dashboard" },
+    { href: "/dashboard/entregas", icon: Truck, label: "Entregas" },
+    { href: "/dashboard/pedidos", icon: Package, label: "Pedidos" },
+    { href: "/dashboard/config", icon: Settings, label: "Configurações" },
   ];
 
   return (

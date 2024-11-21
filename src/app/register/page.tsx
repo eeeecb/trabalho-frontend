@@ -1,4 +1,4 @@
-import Register from "~/components/Layout/Register";
+import Register from "~/components/Layout/dashboard/Register";
 
 export default function RegisterPage() {
   return <Register />;
