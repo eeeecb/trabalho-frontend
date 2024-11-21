@@ -1,11 +1,13 @@
 src
 ├─ app
-│  ├─ _components
-│  │  ├─ login.tsx
-│  │  ├─ post.tsx
-│  │  └─ register.tsx
 │  ├─ dashboard
-│  │  └─ page.tsx
+│  │  ├─ config
+│  │  │  └─ page.tsx
+│  │  ├─ entregas
+│  │  │  └─ page.tsx
+│  │  ├─ page.tsx
+│  │  └─ pedidos
+│  │     └─ page.tsx
 │  ├─ layout.tsx
 │  ├─ login
 │  │  └─ page.tsx
@@ -16,19 +18,19 @@ src
 ├─ components
 │  ├─ Layout
 │  │  ├─ dashboard
-│  │  │  ├─ Footer.tsx
-│  │  │  ├─ Header.tsx
-│  │  │  ├─ Login.tsx
-│  │  │  ├─ Register.tsx
-│  │  │  ├─ Sidebar.tsx
 │  │  │  ├─ config
 │  │  │  │  └─ page.tsx
 │  │  │  ├─ entregas
 │  │  │  │  └─ page.tsx
+│  │  │  ├─ Footer.tsx
+│  │  │  ├─ Header.tsx
 │  │  │  ├─ index.tsx
+│  │  │  ├─ Login.tsx
 │  │  │  ├─ page.tsx
-│  │  │  └─ pedidos
-│  │  │     └─ page.tsx
+│  │  │  ├─ pedidos
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ Register.tsx
+│  │  │  └─ Sidebar.tsx
 │  │  └─ page.tsx
 │  ├─ theme-provider.tsx
 │  └─ ui
@@ -39,6 +41,7 @@ src
 │     ├─ label.tsx
 │     ├─ select.tsx
 │     ├─ switch.tsx
+│     ├─ table.tsx
 │     └─ textarea.tsx
 ├─ env.js
 ├─ hooks
