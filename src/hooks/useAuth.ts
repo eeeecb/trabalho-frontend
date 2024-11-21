@@ -1,6 +1,6 @@
 // src/hooks/useAuth.ts
-import { useState, useEffect } from 'react';
-import AuthService from '~/lib/auth-service';
+import { useState, useEffect } from "react";
+import AuthService from "~/lib/auth-service";
 
 export function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,10 +14,10 @@ export function useAuth() {
     };
 
     checkAuth();
-    window.addEventListener('storage', checkAuth);
+    window.addEventListener("storage", checkAuth);
 
     return () => {
-      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener("storage", checkAuth);
     };
   }, []);
 

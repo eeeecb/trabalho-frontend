@@ -3,7 +3,5 @@
 import ConfigPage from "~/components/Layout/dashboard/config/page";
 
 export default function Config() {
-  return (
-      <ConfigPage />
-  );
+  return <ConfigPage />;
 }

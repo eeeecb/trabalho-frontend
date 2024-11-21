@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { useAuth } from '~/providers/AuthProvider';
+import { useAuth } from "~/providers/AuthProvider";
 
 export default function Register() {
   const router = useRouter();
@@ -35,10 +35,10 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="flex min-h-screen items-center justify-center bg-gray-900">
       <Card className="w-[400px]">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Criar Conta</CardTitle>
+          <CardTitle className="text-center text-2xl">Criar Conta</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -51,7 +51,7 @@ export default function Register() {
                 placeholder="Nome completo"
               />
             </div>
-            
+
             <div>
               <Input
                 id="email"
@@ -73,21 +73,15 @@ export default function Register() {
             </div>
 
             {error && (
-              <div className="text-red-500 text-sm text-center">
-                {error}
-              </div>
+              <div className="text-center text-sm text-red-500">{error}</div>
             )}
 
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={loading}
-            >
+            <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Criando conta..." : "Criar conta"}
             </Button>
-            
-            <div className="text-sm text-center text-gray-400">
-              Já tem uma conta?{' '}
+
+            <div className="text-center text-sm text-gray-400">
+              Já tem uma conta?{" "}
               <Link href="/login" className="text-primary hover:underline">
                 Faça login aqui
               </Link>

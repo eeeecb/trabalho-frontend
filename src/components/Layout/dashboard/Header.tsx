@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { UserCircle, Truck } from "lucide-react";
 import { Button } from "~/components/ui/button";
@@ -22,23 +22,27 @@ export default function Header() {
 
   const handleSignOut = async () => {
     logout();
-    router.push('/');
+    router.push("/");
   };
 
   const userInfo = user as User | null;
 
   return (
-    <header className="bg-gray-800 border-b border-gray-700 p-4">
+    <header className="border-b border-gray-700 bg-gray-800 p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Truck className={cn("w-8 h-8", iconColorClass)} />
-          <h1 className={cn("text-2xl font-bold text-white")}>Transportadora ABC</h1>
+          <Truck className={cn("h-8 w-8", iconColorClass)} />
+          <h1 className={cn("text-2xl font-bold text-white")}>
+            Transportadora ABC
+          </h1>
         </div>
         <div className="flex items-center space-x-4">
           {userInfo ? (
             <div className="flex items-center space-x-4">
-              <UserCircle className={cn("w-12 h-12", iconColorClass)} />
-              <span className={cn("text-base text-gray-300")}>{userInfo.name || userInfo.email}</span>
+              <UserCircle className={cn("h-12 w-12", iconColorClass)} />
+              <span className={cn("text-base text-gray-300")}>
+                {userInfo.name || userInfo.email}
+              </span>
               <Button
                 variant="ghost"
                 onClick={handleSignOut}
@@ -54,10 +58,10 @@ export default function Header() {
                 className={cn(
                   "flex items-center space-x-2",
                   iconColorClass,
-                  "hover:opacity-80"
+                  "hover:opacity-80",
                 )}
               >
-                <UserCircle className={cn("w-12 h-12", iconColorClass)} />
+                <UserCircle className={cn("h-12 w-12", iconColorClass)} />
                 <span className={cn("text-base", iconColorClass)}>Entrar</span>
               </Button>
             </Link>

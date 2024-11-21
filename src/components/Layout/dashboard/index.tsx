@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import { useAuth } from "~/providers/AuthProvider";
 import { useAuthNavigation } from "~/hooks/useAuthNavigation";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
   const { isAuthenticated } = useAuth();
@@ -34,9 +34,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <Header />
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 p-6">
-          {children}
-        </main>
+        <main className="flex-1 p-6">{children}</main>
       </div>
       <Footer />
     </div>

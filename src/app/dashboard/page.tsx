@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Layout from "~/components/Layout/dashboard";
 import DashboardContent from "~/components/Layout/dashboard/page";

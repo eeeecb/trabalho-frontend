@@ -1,9 +1,16 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Package, Truck, Settings, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import {
+  Home,
+  Package,
+  Truck,
+  Settings,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from "lucide-react";
 import { cn } from "~/lib/utils";
 
 export default function Sidebar() {
@@ -12,7 +19,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     const savedState = localStorage.getItem("sidebarExpanded");
-    setIsExpanded(savedState ? JSON.parse(savedState) as boolean : true);
+    setIsExpanded(savedState ? (JSON.parse(savedState) as boolean) : true);
   }, []);
 
   const toggleSidebar = () => {
@@ -27,7 +34,7 @@ export default function Sidebar() {
       icon: isExpanded ? PanelLeftClose : PanelLeftOpen,
       label: "",
       onClick: toggleSidebar,
-      className: "hover:text-custom-wine-400"
+      className: "hover:text-custom-wine-400",
     },
     { href: "/dashboard", icon: Home, label: "Dashboard" },
     { href: "/dashboard/entregas", icon: Truck, label: "Entregas" },
@@ -38,8 +45,8 @@ export default function Sidebar() {
   return (
     <aside
       className={cn(
-        "bg-gray-800 h-screen transition-all duration-500 ease-in-out flex flex-col",
-        isExpanded ? "w-72" : "w-20"
+        "flex h-screen flex-col bg-gray-800 transition-all duration-500 ease-in-out",
+        isExpanded ? "w-72" : "w-20",
       )}
     >
       <nav className="p-6">
@@ -50,15 +57,15 @@ export default function Sidebar() {
                 <button
                   onClick={item.onClick}
                   className={cn(
-                    "flex items-center space-x-4 text-gray-300 hover:text-custom-wine-400 transition-colors w-full",
-                    item.className
+                    "hover:text-custom-wine-400 flex w-full items-center space-x-4 text-gray-300 transition-colors",
+                    item.className,
                   )}
                 >
-                  <item.icon className="w-7 h-7 transition-transform duration-500" />
-                  <span 
+                  <item.icon className="h-7 w-7 transition-transform duration-500" />
+                  <span
                     className={cn(
-                      "text-lg font-medium transition-opacity duration-500 absolute left-20",
-                      isExpanded ? "opacity-100" : "opacity-0"
+                      "absolute left-20 text-lg font-medium transition-opacity duration-500",
+                      isExpanded ? "opacity-100" : "opacity-0",
                     )}
                   >
                     {item.label}
@@ -68,15 +75,17 @@ export default function Sidebar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex items-center space-x-4 text-gray-300 hover:text-custom-wine-400 transition-colors relative",
-                    pathname === item.href && "text-custom-wine-400"
+                    "hover:text-custom-wine-400 relative flex items-center space-x-4 text-gray-300 transition-colors",
+                    pathname === item.href && "text-custom-wine-400",
                   )}
                 >
-                  <item.icon className="w-7 h-7" />
-                  <span 
+                  <item.icon className="h-7 w-7" />
+                  <span
                     className={cn(
-                      "text-lg font-medium transition-opacity duration-500 absolute left-14",
-                      isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
+                      "absolute left-14 text-lg font-medium transition-opacity duration-500",
+                      isExpanded
+                        ? "opacity-100"
+                        : "pointer-events-none opacity-0",
                     )}
                   >
                     {item.label}

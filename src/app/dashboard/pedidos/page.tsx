@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Layout from "~/components/Layout/dashboard";
 import PedidosContent from "~/components/Layout/dashboard/pedidos/page";

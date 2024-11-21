@@ -30,9 +30,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="min-h-screen bg-background">
-              {children}
-            </div>
+            <div className="min-h-screen bg-background">{children}</div>
           </ThemeProvider>
         </AuthProvider>
       </body>

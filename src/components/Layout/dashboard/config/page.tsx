@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Layout from "~/components/Layout/dashboard";
-import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card';
-import { Alert, AlertDescription } from '~/components/ui/alert';
-import { Switch } from '~/components/ui/switch';
-import { Label } from '~/components/ui/label';
-import { Input } from '~/components/ui/input';
-import { Button } from '~/components/ui/button';
-import { Bell, Mail } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Alert, AlertDescription } from "~/components/ui/alert";
+import { Switch } from "~/components/ui/switch";
+import { Label } from "~/components/ui/label";
+import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
+import { Bell, Mail } from "lucide-react";
 
 export default function ConfigPage() {
   const [notificacoes, setNotificacoes] = useState({
     email: true,
     push: false,
-    entregas: true
+    entregas: true,
   });
 
   const [emailConfig, setEmailConfig] = useState({
-    email: '',
-    frequencia: 'diaria'
+    email: "",
+    frequencia: "diaria",
   });
 
   const [saved, setSaved] = useState(false);
@@ -32,11 +32,11 @@ export default function ConfigPage() {
   return (
     <Layout>
       <div>
-        <h1 className="text-2xl font-bold mb-6">Configurações</h1>
-        
+        <h1 className="mb-6 text-2xl font-bold">Configurações</h1>
+
         <div className="space-y-6">
           {saved && (
-            <Alert className="bg-green-100 border-green-500">
+            <Alert className="border-green-500 bg-green-100">
               <AlertDescription className="text-green-800">
                 Configurações salvas com sucesso!
               </AlertDescription>
@@ -119,10 +119,13 @@ export default function ConfigPage() {
                 <Label htmlFor="frequencia">Frequência de relatórios</Label>
                 <select
                   id="frequencia"
-                  className="w-full p-2 border rounded-md"
+                  className="w-full rounded-md border p-2"
                   value={emailConfig.frequencia}
                   onChange={(e) =>
-                    setEmailConfig({ ...emailConfig, frequencia: e.target.value })
+                    setEmailConfig({
+                      ...emailConfig,
+                      frequencia: e.target.value,
+                    })
                   }
                 >
                   <option value="diaria">Diária</option>
@@ -134,9 +137,7 @@ export default function ConfigPage() {
           </Card>
 
           <div className="flex justify-end">
-            <Button onClick={handleSave}>
-              Salvar Configurações
-            </Button>
+            <Button onClick={handleSave}>Salvar Configurações</Button>
           </div>
         </div>
       </div>

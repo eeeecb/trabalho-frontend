@@ -1,10 +1,10 @@
 // src/providers/AuthProvider.tsx
-'use client';
+"use client";
 
-import { createContext, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
-import AuthService from '~/lib/auth-service';
+import { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import AuthService from "~/lib/auth-service";
 
 interface User {
   id: string;
@@ -17,7 +17,11 @@ interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  register: (userData: { email: string; password: string; name: string }) => Promise<void>;
+  register: (userData: {
+    email: string;
+    password: string;
+    name: string;
+  }) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -32,7 +36,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (authData.token && authData.user) {
       setIsAuthenticated(true);
       setUser(authData.user);
-      Cookies.set('auth_token', authData.token);
+      Cookies.set("auth_token", authData.token);
     }
   }, []);
 
@@ -41,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsAuthenticated(true);
     setUser(authData.user);
     if (authData.token) {
-      Cookies.set('auth_token', authData.token);
+      Cookies.set("auth_token", authData.token);
     }
   };
 
@@ -49,16 +53,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     AuthService.logout();
     setIsAuthenticated(false);
     setUser(null);
-    Cookies.remove('auth_token');
-    router.push('/');
+    Cookies.remove("auth_token");
+    router.push("/");
   };
 
-  const register = async (userData: { email: string; password: string; name: string }) => {
+  const register = async (userData: {
+    email: string;
+    password: string;
+    name: string;
+  }) => {
     await AuthService.register(userData);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, register }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, user, login, logout, register }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -67,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }
