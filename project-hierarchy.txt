@@ -1,6 +1,3 @@
-public
-├─ favicon.ico
-└─ truck.jpg
 src
 ├─ app
 │  ├─ _components
@@ -35,10 +32,13 @@ src
 │  │  └─ page.tsx
 │  ├─ theme-provider.tsx
 │  └─ ui
+│     ├─ alert.tsx
 │     ├─ button.tsx
 │     ├─ card.tsx
 │     ├─ input.tsx
+│     ├─ label.tsx
 │     ├─ select.tsx
+│     ├─ switch.tsx
 │     └─ textarea.tsx
 ├─ env.js
 ├─ hooks

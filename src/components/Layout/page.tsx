@@ -135,9 +135,9 @@ export function BlockPage() {
       {/* Navigation */}
       <nav className="fixed top-0 z-50 w-full bg-transparent px-4 py-4">
         <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Truck className="h-8 w-8 text-gray-700" />
-            <span className="text-gray-700 text-xl font-bold">Transportadora ABC</span>
+          <h1 className={cn("text-2xl font-bold", titleColorClass)}>Transportadora ABC</h1>
+    <div className="flex items-center space-x-4">
+        <Truck className="h-8 w-8 text-gray-700" />
           </div>
           <div className="flex space-x-4">
             {!isAuthenticated ? (

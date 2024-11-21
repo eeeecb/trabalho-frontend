@@ -6,8 +6,8 @@ import Link from "next/link";
 import { BlockPage } from "~/components/Layout/page";
 
 export const metadata: Metadata = {
-  title: "Dashboard - Trabaio Camião",
-  description: "Dashboard do aplicativo Trabaio Camião",
+  title: "Dashboard - Transportadora ABC",
+  description: "Dashboard do aplicativo Transportadora ABC",
 };
 
 export default function HomePage() {

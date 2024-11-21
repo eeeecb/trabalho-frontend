@@ -1,6 +1,6 @@
 'use client';
 
-import { UserCircle } from "lucide-react";
+import { UserCircle, Truck } from "lucide-react";
 import { Button } from "../../ui/button";
 import { cn } from "../../../lib/utils";
 import Link from "next/link";
@@ -31,7 +31,10 @@ export default function Header() {
   return (
     <header className="bg-gray-800 border-b border-gray-700 p-4">
       <div className="flex items-center justify-between">
-        <h1 className={cn("text-2xl font-bold", titleColorClass)}>Trabaio Camião</h1>
+        <div className="flex items-center gap-2">
+          <Truck className={cn("w-8 h-8", iconColorClass)} />
+          <h1 className={cn("text-2xl font-bold", titleColorClass)}>Transportadora ABC</h1>
+        </div>
         <div className="flex items-center space-x-4">
           {userInfo ? (
             <div className="flex items-center space-x-4">

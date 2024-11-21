@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Trabaio Camião",
+  title: "Transportadora ABC",
   description: "Aplicativo criado com T3 Stack",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
