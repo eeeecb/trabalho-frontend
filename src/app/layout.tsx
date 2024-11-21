@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={`font-sans ${inter.variable}`}>
         <AuthProvider>
           <ThemeProvider
@@ -30,7 +30,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="min-h-screen bg-background">
+              {children}
+            </div>
           </ThemeProvider>
         </AuthProvider>
       </body>

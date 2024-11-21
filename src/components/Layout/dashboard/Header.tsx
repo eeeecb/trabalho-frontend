@@ -16,6 +16,10 @@ export default function Header() {
   const { user, logout } = useAuth();
   const router = useRouter();
 
+  // Para trocar as cores, apenas altere a cor aqui
+  const iconColorClass = "!text-custom-wine";
+  const hoverColorClass = "hover:!text-custom-wine";
+
   const handleSignOut = async () => {
     logout();
     router.push('/');

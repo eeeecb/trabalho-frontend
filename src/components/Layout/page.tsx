@@ -3,24 +3,30 @@
 import { cn } from "~/lib/utils";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
-import { 
-  Truck, 
-  Rocket, 
-  Shield, 
-  PiggyBank, 
-  Box, 
-  Radar, 
+import {
+  Truck,
+  Rocket,
+  Shield,
+  PiggyBank,
+  Box,
+  Radar,
   PlaneTakeoff,
   PackageCheck,
-  Calculator
-} from 'lucide-react';
+  Calculator,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "~/providers/AuthProvider";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "~/components/ui/select";
 import { useState } from "react";
 
 // Interface para as props do CircularProgress
@@ -32,15 +38,20 @@ interface CircularProgressProps {
 }
 
 // Novo componente CircularProgress com tipagem adequada
-const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, label, color, bgColor }) => {
+const CircularProgress: React.FC<CircularProgressProps> = ({
+  percentage,
+  label,
+  color,
+  bgColor,
+}) => {
   const radius = 38;
   const circumference = Math.PI * radius;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative w-24 h-12">
-        <svg className="w-24 h-12" viewBox="0 0 96 48">
+      <div className="relative h-12 w-24">
+        <svg className="h-12 w-24" viewBox="0 0 96 48">
           <path
             d="M 8,48 a 40,40 0 0 1 80,0"
             stroke={bgColor}
@@ -64,7 +75,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({ percentage, label, 
           <span className="text-xl font-bold text-white">{percentage}%</span>
         </div>
       </div>
-      <span className="mt-2 text-sm font-medium text-gray-300 text-center max-w-[120px]">
+      <span className="mt-2 max-w-[120px] text-center text-sm font-medium text-gray-300">
         {label}
       </span>
     </div>
@@ -105,24 +116,28 @@ export function BlockPage() {
   const services: Service[] = [
     {
       name: "TRANSPORTE DEDICADO",
-      description: "Frota exclusiva dimensionada para sua operação, com veículos personalizados, rastreamento 24h e equipe especializada. Ideal para operações regulares que exigem alto nível de personalização e controle",      
-      icon: Truck
+      description:
+        "Frota exclusiva dimensionada para sua operação, com veículos personalizados, rastreamento 24h e equipe especializada. Ideal para operações regulares que exigem alto nível de personalização e controle",
+      icon: Truck,
     },
     {
       name: "TRANSPORTE FRACIONADO",
-      description: "Coletas e entregas programadas para cargas fracionadas, com consolidação em terminais estratégicos, rastreamento por unidade e gestão de última milha em centros urbanos",
-      icon: PackageCheck
+      description:
+        "Coletas e entregas programadas para cargas fracionadas, com consolidação em terminais estratégicos, rastreamento por unidade e gestão de última milha em centros urbanos",
+      icon: PackageCheck,
     },
     {
       name: "CARGAS ESPECIAIS",
-      description: "Transporte especializado para cargas indivisíveis, perigosas ou que necessitam de temperatura controlada, com equipamentos dedicados e licenças específicas",
-      icon: Shield
+      description:
+        "Transporte especializado para cargas indivisíveis, perigosas ou que necessitam de temperatura controlada, com equipamentos dedicados e licenças específicas",
+      icon: Shield,
     },
     {
       name: "LOGÍSTICA INTERNACIONAL",
-      description: "Operações door-to-door com desembaraço aduaneiro, consolidação de cargas, agenciamento de frete internacional e assessoria em comércio exterior",
-      icon: PlaneTakeoff
-    }
+      description:
+        "Operações door-to-door com desembaraço aduaneiro, consolidação de cargas, agenciamento de frete internacional e assessoria em comércio exterior",
+      icon: PlaneTakeoff,
+    },
   ];
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -136,10 +151,15 @@ export function BlockPage() {
       {/* Navigation */}
       <nav className="fixed top-0 z-50 w-full bg-transparent px-4 py-4">
         <div className="container mx-auto flex items-center justify-between">
-          <h1 className={cn("text-2xl font-bold text-white")}>Transportadora ABC</h1>
-    <div className="flex items-center space-x-4">
-        <Truck className="h-8 w-8 text-gray-700" />
+          <div className="flex items-center gap-2">
+            {" "}
+            {/* Adicionado div com flex e gap-2 */}
+            <Truck className="h-8 w-8 text-white" />
+            <h1 className={cn("text-2xl font-bold text-white")}>
+              Transportadora ABC
+            </h1>
           </div>
+
           <div className="flex space-x-4">
             {!isAuthenticated ? (
               <>
@@ -154,7 +174,7 @@ export function BlockPage() {
                   className="bg-blue-600 text-white hover:bg-blue-700"
                   onClick={() => router.push("/register")}
                 >
-                  Register
+                  Registro
                 </Button>
               </>
             ) : (
@@ -222,14 +242,22 @@ export function BlockPage() {
               variant="outline"
               size="lg"
               className="border-white text-white hover:bg-white hover:text-black"
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document
+                  .getElementById("services")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             >
               Saiba Mais sobre Nossos Serviços
             </Button>
-            <Button 
-              size="lg" 
-              className="bg-blue-600 hover:bg-blue-700"
-              onClick={() => document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' })}
+            <Button
+              size="lg"
+              className="bg-blue-600 text-white hover:bg-blue-700"
+              onClick={() =>
+                document
+                  .getElementById("quote-form")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
             >
               Solicite um Orçamento
             </Button>
@@ -261,21 +289,30 @@ export function BlockPage() {
       {/* Services Section */}
       <section id="services" className="bg-white px-4 py-20">
         <div className="container mx-auto">
-          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">Nossos Serviços</h2>
+          <h2 className="mb-12 text-center text-4xl font-bold text-gray-900">
+            Nossos Serviços
+          </h2>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {/* Quote Form - Atualizado com cores de texto mais escuras */}
-            <div id="quote-form" className="bg-gray-50 rounded-lg shadow-xl p-8">
-              <div className="text-center mb-6">
-                <Calculator className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-gray-900">Solicite seu Orçamento</h3>
-                <p className="text-gray-600">Preencha o formulário abaixo e entraremos em contato</p>
+            <div
+              id="quote-form"
+              className="rounded-lg bg-gray-50 p-8 shadow-xl"
+            >
+              <div className="mb-6 text-center">
+                <Calculator className="mx-auto mb-4 h-12 w-12 text-blue-600" />
+                <h3 className="text-2xl font-bold text-gray-900">
+                  Solicite seu Orçamento
+                </h3>
+                <p className="text-gray-600">
+                  Preencha o formulário abaixo e entraremos em contato
+                </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-900">
                       Nome Completo
                     </label>
                     <Input
@@ -286,7 +323,7 @@ export function BlockPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-900">
                       Empresa
                     </label>
                     <Input
@@ -298,9 +335,9 @@ export function BlockPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-900">
                       Email
                     </label>
                     <Input
@@ -311,7 +348,7 @@ export function BlockPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-900">
                       Telefone
                     </label>
                     <Input
@@ -324,7 +361,7 @@ export function BlockPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="mb-1 block text-sm font-medium text-gray-900">
                     Tipo de Serviço
                   </label>
                   <Select required>
@@ -332,17 +369,23 @@ export function BlockPage() {
                       <SelectValue placeholder="Selecione o tipo de serviço" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="dedicated">Transporte Dedicado</SelectItem>
-                      <SelectItem value="storage">Armazenagem e Distribuição</SelectItem>
-                      <SelectItem value="express">Cargas Expressas</SelectItem>
-                      <SelectItem value="logistics">Gestão Logística</SelectItem>
+                      <SelectItem value="dedicated">
+                        Transporte Dedicado
+                      </SelectItem>
+                      <SelectItem value="storage">
+                        Transporte Fracionado
+                      </SelectItem>
+                      <SelectItem value="express">Cargas Esppeciais</SelectItem>
+                      <SelectItem value="logistics">
+                        Logística Internacional
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-900">
                       Origem
                     </label>
                     <Input
@@ -353,7 +396,7 @@ export function BlockPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                    <label className="mb-1 block text-sm font-medium text-gray-900">
                       Destino
                     </label>
                     <Input
@@ -366,36 +409,39 @@ export function BlockPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-900 mb-1">
+                  <label className="mb-1 block text-sm font-medium text-gray-900">
                     Detalhes da Carga
                   </label>
                   <Textarea
                     required
                     placeholder="Descreva os detalhes da sua carga (peso, dimensões, quantidade, etc)"
-                    className="w-full h-24 bg-white text-gray-900 placeholder:text-gray-500"
+                    className="h-24 w-full bg-white text-gray-900 placeholder:text-gray-500"
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                <Button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white hover:bg-blue-700"
                   disabled={formSubmitted}
                 >
-                  {formSubmitted ? "Enviado com Sucesso!" : "Enviar Solicitação"}
+                  {formSubmitted
+                    ? "Enviado com Sucesso!"
+                    : "Enviar Solicitação"}
                 </Button>
               </form>
             </div>
 
             <div className="grid grid-cols-1 gap-6">
               {services.map((service) => (
-                <Card key={service.name} id={service.name.toLowerCase().replace(/\s+/g, '-')}>
+                <Card
+                  key={service.name}
+                  id={service.name.toLowerCase().replace(/\s+/g, "-")}
+                >
                   <CardContent className="flex items-center p-6">
                     <service.icon className="mr-4 h-12 w-12 text-blue-600" />
                     <div>
                       <h3 className="mb-2 text-lg font-bold">{service.name}</h3>
-                      <p className="text-gray-600">
-                        {service.description}
-                      </p>
+                      <p className="text-gray-600">{service.description}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -409,7 +455,8 @@ export function BlockPage() {
       <footer className="bg-gray-900 py-8">
         <div className="container mx-auto px-4">
           <div className="text-center text-gray-400">
-            © {new Date().getFullYear()} Transportadora ABC - Todos os direitos reservados
+            © {new Date().getFullYear()} Transportadora ABC - Todos os direitos
+            reservados
           </div>
         </div>
       </footer>

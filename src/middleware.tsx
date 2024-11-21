@@ -1,11 +1,11 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-// Rotas que não precisam de autenticação
-const publicRoutes = ['/', '/login', '/register'];
-// Rotas que precisam de autenticação
-const protectedRoutes = ['/dashboard'];
-
+/**
+ * Middleware para controle de autenticação das rotas
+ * @param request - Requisição Next.js
+ * @returns Response do Next.js
+ */
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   
@@ -22,6 +22,7 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
+// Configuração das rotas que serão verificadas pelo middleware
 export const config = {
   matcher: [
     // Rotas que queremos proteger
@@ -29,4 +30,4 @@ export const config = {
     // Excluir arquivos estáticos e API
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ]
-}
+};

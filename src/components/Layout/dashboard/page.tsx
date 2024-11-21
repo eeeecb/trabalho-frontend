@@ -36,18 +36,12 @@ interface DadosMensais {
   faturamento: number;
 }
 
-const gerarDadosMock = (
-  seed: number,
-): {
-  dashboardData: DashboardData;
-  dadosMensais: DadosMensais[];
-  alertas: string[];
-} => {
+const gerarDadosMock = (seed: number) => {
   const seededRandom = (
     min: number,
     max: number,
-    offset: number = 0,
-  ): number => {
+    offset = 0  // Removed explicit type as it can be inferred
+  ) => {
     const rng = Math.sin(seed + offset) * 10000;
     return Math.floor((rng - Math.floor(rng)) * (max - min + 1) + min);
   };
@@ -56,7 +50,7 @@ const gerarDadosMock = (
   const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"];
   const dadosMensais = meses.map((mes, index) => {
     const pedidos = seededRandom(30, 100, index);
-    const entregas = Math.floor(pedidos * (0.8 + Math.random() * 0.2)); // 80-100% dos pedidos
+    const entregas = Math.floor(pedidos * (0.8 + Math.random() * 0.2));
     const faturamento = pedidos * seededRandom(200, 500, index + meses.length);
 
     return {
@@ -70,29 +64,37 @@ const gerarDadosMock = (
   // Cálculo do total e médias
   const totalPedidos = dadosMensais.reduce(
     (acc, curr) => acc + curr.pedidos,
-    0,
+    0
   );
   const totalFaturamento = dadosMensais.reduce(
     (acc, curr) => acc + curr.faturamento,
-    0,
+    0
   );
 
   // Alertas baseados nos dados
-  const alertas = [];
+  const alertas: string[] = [];
+  
+  // Safely access last two months with null checks
   const ultimoMes = dadosMensais[dadosMensais.length - 1];
   const penultimoMes = dadosMensais[dadosMensais.length - 2];
 
-  if (ultimoMes.pedidos < penultimoMes.pedidos) {
+  if (ultimoMes && penultimoMes && ultimoMes.pedidos < penultimoMes.pedidos) {
     alertas.push(
-      `Queda de ${Math.floor((1 - ultimoMes.pedidos / penultimoMes.pedidos) * 100)}% nos pedidos em relação ao mês anterior`,
+      `Queda de ${Math.floor(
+        (1 - ultimoMes.pedidos / penultimoMes.pedidos) * 100
+      )}% nos pedidos em relação ao mês anterior`
     );
   }
-  if (ultimoMes.entregas / ultimoMes.pedidos < 0.85) {
+
+  if (ultimoMes && ultimoMes.entregas / ultimoMes.pedidos < 0.85) {
     alertas.push("Taxa de entrega abaixo do esperado no último mês");
   }
-  if (ultimoMes.faturamento < penultimoMes.faturamento) {
+
+  if (ultimoMes && penultimoMes && ultimoMes.faturamento < penultimoMes.faturamento) {
     alertas.push(
-      `Redução de ${Math.floor((1 - ultimoMes.faturamento / penultimoMes.faturamento) * 100)}% no faturamento em relação ao mês anterior`,
+      `Redução de ${Math.floor(
+        (1 - ultimoMes.faturamento / penultimoMes.faturamento) * 100
+      )}% no faturamento em relação ao mês anterior`
     );
   }
 

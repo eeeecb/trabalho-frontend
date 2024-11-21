@@ -17,7 +17,7 @@ interface User {
       if (typeof window === 'undefined') return { user: null, token: null };
       
       const data = localStorage.getItem(this.AUTH_KEY);
-      return data ? JSON.parse(data) : { user: null, token: null };
+      return data ? JSON.parse(data) as AuthData : { user: null, token: null };
     }
   
     static setAuthData(data: AuthData) {
@@ -35,7 +35,7 @@ interface User {
   
     static async login(email: string, password: string): Promise<AuthData> {
       // Simular validação de credenciais
-      const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+      const storedUsers = JSON.parse(localStorage.getItem('users') ?? '[]') as Array<User & { password: string }>;
       const user = storedUsers.find((u: User & { password: string }) => 
         u.email === email && u.password === password
       );
@@ -58,7 +58,7 @@ interface User {
     }
   
     static async register(userData: { name: string; email: string; password: string }): Promise<void> {
-      const storedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+      const storedUsers = JSON.parse(localStorage.getItem('users') ?? '[]') as Array<User & { password: string }>;
       
       // Verificar se o email já existe
       if (storedUsers.some((u: User) => u.email === userData.email)) {

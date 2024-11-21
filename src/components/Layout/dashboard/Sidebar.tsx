@@ -7,12 +7,12 @@ import { Home, Package, Truck, Settings, PanelLeftClose, PanelLeftOpen } from "l
 import { cn } from "~/lib/utils";
 
 export default function Sidebar() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const savedState = localStorage.getItem("sidebarExpanded");
-    setIsExpanded(savedState ? JSON.parse(savedState) : true);
+    setIsExpanded(savedState ? JSON.parse(savedState) as boolean : true);
   }, []);
 
   const toggleSidebar = () => {

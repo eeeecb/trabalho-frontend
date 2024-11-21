@@ -1,12 +1,9 @@
 // src/app/page.tsx
-import { Metadata } from "next";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
-import { Activity, Users, BookOpen, Calendar } from "lucide-react";
-import Link from "next/link";
+import type { Metadata } from "next";
 import { BlockPage } from "~/components/Layout/page";
 
 export const metadata: Metadata = {
-  title: "Dashboard - Transportadora ABC",
+  title: "Transportadora ABC",
   description: "Dashboard do aplicativo Transportadora ABC",
 };
 
