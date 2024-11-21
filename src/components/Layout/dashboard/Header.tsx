@@ -1,8 +1,8 @@
 'use client';
 
 import { UserCircle, Truck } from "lucide-react";
-import { Button } from "../../ui/button";
-import { cn } from "../../../lib/utils";
+import { Button } from "~/components/ui/button";
+import { cn } from "~/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "~/providers/AuthProvider";
@@ -16,11 +16,6 @@ export default function Header() {
   const { user, logout } = useAuth();
   const router = useRouter();
 
-  // Para trocar as cores, apenas altere a cor aqui
-  const titleColorClass = "!text-custom-wine";
-  const iconColorClass = "!text-custom-wine";
-  const hoverColorClass = "hover:!text-custom-wine";
-
   const handleSignOut = async () => {
     logout();
     router.push('/');
@@ -33,7 +28,7 @@ export default function Header() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Truck className={cn("w-8 h-8", iconColorClass)} />
-          <h1 className={cn("text-2xl font-bold", titleColorClass)}>Transportadora ABC</h1>
+          <h1 className={cn("text-2xl font-bold text-white")}>Transportadora ABC</h1>
         </div>
         <div className="flex items-center space-x-4">
           {userInfo ? (

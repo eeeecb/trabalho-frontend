@@ -1,7 +1,8 @@
 "use client";
 
-import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
+import { cn } from "~/lib/utils";
+import { Button } from "~/components/ui/button";
+import { Card, CardContent } from "~/components/ui/card";
 import { 
   Truck, 
   Rocket, 
@@ -17,9 +18,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "~/providers/AuthProvider";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { useState } from "react";
 
 // Interface para as props do CircularProgress
@@ -135,7 +136,7 @@ export function BlockPage() {
       {/* Navigation */}
       <nav className="fixed top-0 z-50 w-full bg-transparent px-4 py-4">
         <div className="container mx-auto flex items-center justify-between">
-          <h1 className={cn("text-2xl font-bold", titleColorClass)}>Transportadora ABC</h1>
+          <h1 className={cn("text-2xl font-bold text-white")}>Transportadora ABC</h1>
     <div className="flex items-center space-x-4">
         <Truck className="h-8 w-8 text-gray-700" />
           </div>
