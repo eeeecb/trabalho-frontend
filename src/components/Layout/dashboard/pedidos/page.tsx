@@ -54,7 +54,7 @@ const produtos = [
   { nome: "Mouse Gamer", preco: 199.9 },
   { nome: "Teclado Mecânico", preco: 399.9 },
   { nome: "Câmera Digital", preco: 1599.9 },
-] as const;
+];
 
 // Função para gerar dados mockados
 const gerarPedidosMock = (seed: number = Date.now()): Pedido[] => {
@@ -85,20 +85,22 @@ const gerarPedidosMock = (seed: number = Date.now()): Pedido[] => {
           produtos.length - 1,
         );
         const quantidade = seededRandom(seed + index + prodIndex, 1, 3);
+        const produto = produtos[produtoIndex]!;
         return {
-          ...produtos[produtoIndex],
+          nome: produto.nome,
+          preco: produto.preco,
           quantidade,
         };
       },
     );
 
     const valorTotal = produtosPedido.reduce(
-      (acc, prod) => acc + prod.preco * prod.quantidade,
+      (acc, prod) => acc + (prod.preco ?? 0) * prod.quantidade,
       0,
     );
 
     const statusIndex = seededRandom(seed + index + 3, 0, status.length - 1);
-    const pedidoStatus = status[statusIndex];
+    const pedidoStatus = status[statusIndex]!;
 
     // Se o pedido foi enviado ou entregue, gera um ID de entrega
     const entregaId = ["enviado", "entregue"].includes(pedidoStatus)

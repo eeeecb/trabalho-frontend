@@ -57,8 +57,8 @@ const gerarEntregasMock = (seed: number = Date.now()): Entrega[] => {
     return {
       id: `ENT-${seed}-${index + 1}`,
       codigo: `${seededRandom(seed + index + 4, 1000, 9999)}-${seededRandom(seed + index + 5, 100, 999)}-${seededRandom(seed + index + 6, 10, 99)}`,
-      destino: destinos[destinoIndex],
-      status: status[statusIndex],
+      destino: destinos[destinoIndex] as string,
+      status: status[statusIndex]!,
       data: dataBase.toLocaleDateString('pt-BR'),
       previsao: previsaoBase.toLocaleDateString('pt-BR')
     };
