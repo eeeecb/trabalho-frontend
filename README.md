@@ -46,7 +46,7 @@ Antes de começar, certifique-se de ter instalado:
 1. Clone o repositório
 ```bash
 git clone https://github.com/eeeecb/trabalho-frontend.git
-cd transportadora-abc
+cd trabalho-frontend
 ```
 
 2. Instale as dependências
@@ -88,8 +88,6 @@ src/
 
 O sistema utiliza autenticação baseada em sessão com as seguintes rotas protegidas:
 - `/dashboard/*` - Todas as rotas do dashboard
-- `/config` - Configurações do sistema
-- `/perfil` - Perfil do usuário
 
 ## 🛠️ Comandos Úteis
 
