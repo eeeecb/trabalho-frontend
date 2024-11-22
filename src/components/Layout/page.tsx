@@ -375,7 +375,7 @@ export function BlockPage() {
                       <SelectItem value="storage">
                         Transporte Fracionado
                       </SelectItem>
-                      <SelectItem value="express">Cargas Esppeciais</SelectItem>
+                      <SelectItem value="express">Cargas Especiais</SelectItem>
                       <SelectItem value="logistics">
                         Logística Internacional
                       </SelectItem>
